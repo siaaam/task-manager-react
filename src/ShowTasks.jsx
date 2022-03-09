@@ -2,11 +2,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Table } from 'react-bootstrap';
 
 const ShowTasks = ({ tasks }) => {
-  console.log(tasks);
   return (
     <Container>
       <div>
-        <Table responsive="sm">
+        <Table>
           <thead>
             <tr>
               <th>#</th>
@@ -21,7 +20,7 @@ const ShowTasks = ({ tasks }) => {
           </thead>
           <tbody>
             {tasks.map((task, i) => (
-              <tr>
+              <tr key={i}>
                 <td>{i + 1}</td>
                 <td>{task.title}</td>
                 <td>{task.subTitle}</td>

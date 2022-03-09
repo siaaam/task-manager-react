@@ -5,6 +5,7 @@ import { Button, Form, Container, Alert } from 'react-bootstrap';
 import './App.css';
 
 import ShowTasks from './ShowTasks';
+import Analysis from './Analysis';
 
 const info = {
   title: '',
@@ -21,6 +22,11 @@ function App() {
   const [task, setTask] = useState(info);
   const [tasks, setTasks] = useState([]);
   const [taskError, setTaskError] = useState(null);
+
+  const [total, setTotal] = useState(0);
+  const [newTask, setNewTask] = useState(0);
+  const [inprogress, setInprogress] = useState(0);
+  const [completed, setCompleted] = useState(0);
 
   const changeHandler = (e) => {
     setTask({
@@ -49,6 +55,7 @@ function App() {
       setTaskError('Please Fill Up All The Necessary  Fields');
     } else {
       setTasks([...tasks, task]);
+      setTotal(++tasks.length);
     }
 
     // reset state
@@ -57,6 +64,8 @@ function App() {
 
   const { title, subTitle, assignTo, start, end, priority, status, range } =
     task;
+
+  // play with local storage
 
   return (
     <>
@@ -192,6 +201,8 @@ function App() {
         <br />
         {taskError && <Alert variant="warning">{taskError}</Alert>}
       </Container>
+
+      <Analysis tasks={tasks} total={total} />
 
       <ShowTasks tasks={tasks} />
     </>
